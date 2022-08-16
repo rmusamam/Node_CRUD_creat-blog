@@ -13,6 +13,10 @@ const port = process.env.PORT;
 const url='mongodb+srv://rmusamam:ranausama@cluster0.fsilfnm.mongodb.net/JWT?retryWrites=true&w=majority'
 
 mongoose.connect(url,{useNewUrlParser:true},()=>console.log('connected'))
+const db= mongoose.connection;
+
+db.once('open',()=>console.log('db is now connected checked successfully'))
+db.on('error',e=>console.log('failed to connected'))
 
 
 app.listen(port, () => {
