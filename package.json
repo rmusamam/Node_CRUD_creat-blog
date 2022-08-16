@@ -1,0 +1,27 @@
+{
+  "name": "node_crud_creat-blog",
+  "version": "1.0.0",
+  "description": "CRUD BLOG practicing MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmusamam/Node_CRUD_creat-blog.git"
+  },
+  "author": "Muhammad Usama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmusamam/Node_CRUD_creat-blog/issues"
+  },
+  "homepage": "https://github.com/rmusamam/Node_CRUD_creat-blog#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.2",
+    "nodemon": "^2.0.19"
+  }
+}
