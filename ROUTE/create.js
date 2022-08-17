@@ -1,3 +1,7 @@
-const router=require('express').Router()
-const create= require('../CONTROLLER/newUser')
-router.route('/create').post(create.newUser)
+const router = require("express").Router();
+const createController = require("../CONTROLLER/newUser");
+
+router.route("/create").post(createController.newUser);
+
+
+module.exports = router;
