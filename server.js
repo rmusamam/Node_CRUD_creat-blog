@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 
 const create= require('./ROUTE/create')
 const blog= require('./ROUTE/blogRoute')
+const checkToken=require('./MIDDLEWARE/checkToken')
+const verifyToken=require('./MIDDLEWARE/verifyToken')
 
 
 
@@ -36,7 +38,7 @@ mongoose.connect(process.env.DB.replace("<PASSWORD>", process.env.PASSWORD), {
 
 app.use('/',create)
 app.use('/blog',blog)
-
+app.use(checkToken,verifyToken)
 
 app.listen(port, () => {
   console.log(`SERVER RUNNING AT PORT:${port}`);

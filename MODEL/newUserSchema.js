@@ -16,6 +16,10 @@ const User = mongoose.Schema({
     // min: 5,
     required: true,
   },
+  role:{
+    type:String,
+    default:'user'
+  }
 });
 
 const addUser= mongoose.model('blogUsers',User)

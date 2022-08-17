@@ -1,5 +1,5 @@
 const addUser= require('../MODEL/newUserSchema')
-
+const jwt= require('jsonwebtoken')
 exports.newUser=async(req,res)=>{
     // console.log(req.body)
     const data = req.body;
@@ -20,4 +20,20 @@ exports.newUser=async(req,res)=>{
         console.log(err);
     }
 
+}
+
+
+exports.login=(req,res)=>{
+    const login= addUser.findOne({email:req.body.email})
+    if(!login){
+        console.log("user not exist");
+        res.status(404).send("Not found")
+    }
+    else if(req.body.role=='admin' && req.body.password==password){
+        jwt.sign({login},'secretkey',{expiresIn:'2h'},(err,token)=>{
+            res.status(200).json({
+                token
+            })
+        })
+    }
 }

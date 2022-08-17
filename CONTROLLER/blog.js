@@ -45,3 +45,18 @@ exports.deleteBlog=async (req,res)=>{
           });
     }
 }
+
+exports.updatePost=async(req,res)=>{
+    try{
+        const updatedPost=await blogPost.findByIdAndUpdate(req.params.id,req.body,{new:true})
+        res.status(200).json({
+            status:'Updated',
+            updatedPost
+
+        })
+    }catch(err){
+        res.status(400).json({
+            message: "Failed to update post from DB",
+          });
+    }
+}
