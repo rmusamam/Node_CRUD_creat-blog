@@ -1,4 +1,5 @@
 const router= require('express').Router()
+
 const blogController= require('../CONTROLLER/blog')
 const { checkToken } = require('../MIDDLEWARE/checkToken')
 const { verifyToken } = require('../MIDDLEWARE/verifyToken')
