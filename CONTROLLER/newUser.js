@@ -10,9 +10,10 @@ exports.newUser=async(req,res)=>{
         const hashedPassword = await bcrypt.hash(data.password, salt);
       
         const user= await addUser.create({
-            email: data.email,
             name: data.name,
+            email: data.email,
             password: hashedPassword,
+            role: data.role
           })
         res.status(200).json({
             message:'user added',
@@ -31,18 +32,32 @@ exports.newUser=async(req,res)=>{
 }
 
 
-exports.login=(req,res)=>{
-    const login= addUser.findOne({email:req.body.email})
+exports.login=async(req,res)=>{
+    const login= await addUser.findOne({email:req.body.email})
+    console.log('role isskdjfasdkfjasjfklasjfskaf: ',login.role)
+
     if(!login){
         console.log("user not exist");
         res.status(404).send("Not found")
     }
-    else if(req.body.role=='admin' && req.body.password==password){
-        jwt.sign({login},'secretkey',{expiresIn:'2h'},(err,token)=>{
-            res.status(200).json({
-                token
+    else if(login.role === 'admin'){
+        const validPassword = bcrypt.compare(req.body.password, login.password);
+        console.log("bcrypt outPut:",validPassword)
+        if(validPassword){
+            console.log("password is correct")
+            jwt.sign({login},process.env.TOKEN_SECRET,{expiresIn:'2h'},(err,token)=>{
+                res.status(200).json({
+                    token
+                })
             })
-        })
+        }
+        else{
+            res.status(400).send('Role is admin Access Denied')
+        }
+        
+    }
+    else{
+        res.status(400).send('Your are not Admin. Access Denied')
     }
 }
 

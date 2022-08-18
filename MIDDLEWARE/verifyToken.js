@@ -1,23 +1,20 @@
 const jwt=require('jsonwebtoken')
 
-module.exports= function verifyToken (req,res,next){
+exports.verifyToken = (req,res,next)=>{
     console.log('in verifying Token req.path:',req.path);
-    if(req.path=='/login' || req.path=='/register'){
+    if(req.path=='/login' || req.path=='/create'){
         console.log("login and register doesnot require token");
         return next()
     }
     else{
         console.log('in verifyToken req.token: ',req.token)
         jwt.verify(req.token ,process.env.TOKEN_SECRET,(err,authdata)=>{
-            console.log('error of token : ',err)
+            console.log('error of token : ',authdata)
             if(err){
                 res.json(err)
             }
             else{
-                res.json({
-                    message:'ok',
-                    authdata
-                })
+                next()
             }
         })
     }

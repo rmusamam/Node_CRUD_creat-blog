@@ -12,16 +12,19 @@ const validateLogin= (req,res,next)=>{
   
      const login=loginSchema.validate(req.body)
      console.log('login validted:',login)
-     
-     if(!login.error) return next()
-     res.status(400).send("login Credentials are not correct")
+    
+     if(login)  {
+      console.log(login);
+       next()
+    }
+     else res.status(400).send("login Credentials are not correct")
   }
   
-  const emailExist= (req,res,next)=>{
-  
-    const data = req.body;
-  const existAlready= userSchema.findOne({email:req.body.email})
-  console.log(existAlready);
+  const emailExist= async (req,res,next)=>{
+    const data = req.body.email
+    console.log('in email exist',data);
+  const existAlready= await userSchema.exists({email:data});
+  console.log('this is result of email exist',existAlready);
   //  console.log("this EMAIL checking data middleware function",existAlready);
     if(existAlready)
     {
@@ -43,7 +46,8 @@ const validateRegisteration = (req, res, next) => {
     role: joi.string(),
    });
    const Responses = schema.validate(data);
-   if(!Responses.error) return next()
+   if(!Responses.error)  next()
+   else
    res.send(Responses.error.details[0].message)
   };
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const User = mongoose.Schema({
+const UserBlog = mongoose.Schema({
   name: {
     type: String,
     // min: 5,
@@ -18,10 +18,12 @@ const User = mongoose.Schema({
   },
   role:{
     type:String,
-    default:'user'
+    required: true
+    // default: ['user','admin']
   }
 });
 
-const addUser= mongoose.model('blogUsers',User)
+// module.exports = mongoose.model('Blogers',UserBlog)
+module.exports = mongoose.models.UserBlog || mongoose.model('UserBlog', UserBlog);
 
-module.exports=addUser
+
