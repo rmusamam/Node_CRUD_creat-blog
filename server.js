@@ -17,7 +17,7 @@ mongoose.connect(process.env.DB.replace("<PASSWORD>", process.env.PASSWORD), {
   useNewUrlParser:true
 })
 .then(()=>console.log('DB connected'))
-.catch(e=>console.log("error:",e))
+.catch(e=>console.log("cant connect to db , error:",e))
 
 // const url='mongodb+srv://rmusamam:ranausama@cluster0.fsilfnm.mongodb.net/JWT?retryWrites=true&w=majority'
 // mongoose.connect(url,{useNewUrlParser:true},()=>console.log('connected'))

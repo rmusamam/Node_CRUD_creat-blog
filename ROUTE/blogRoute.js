@@ -5,9 +5,9 @@ const { verifyToken } = require('../MIDDLEWARE/verifyToken')
 const {checkUser}= require('../MIDDLEWARE/checkUser')
 
 
-router.route('/createPost').post(blogController.createBlog)
+router.route('/createPost').post(checkToken,verifyToken,blogController.createBlog)
 router.route('/showPost').get(blogController.showBlog)
-router.route('/updatePost/:id').patch(blogController.updatePost)
-router.route('/deletePost/:id').delete(blogController.deleteBlog)
+router.route('/updatePost/:id').patch(checkUser,blogController.updatePost)
+router.route('/deletePost/:id').delete(checkUser,blogController.deleteBlog)
 
 module.exports=router
